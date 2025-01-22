@@ -46,11 +46,13 @@ st.title("Фотоклассификатор")
 uploaded_file = st.file_uploader("Выберите изображение...", type=["jpg", "jpeg", "png"]) 
 
 if uploaded_file is not None: 
-    image = Image.open(uploaded_file) 
-    st.image(image, caption='Uploaded Image.', use_container_width=True) 
-    st.write("") 
-    st.write("Определяет вид...") 
-    
-    prediction = predict_step(image) 
-    if prediction is not None: 
-        st.write(f"Относится к виду: {prediction}") 
+    try:
+        image = Image.open(uploaded_file) 
+        st.image(image, caption='Загруженное изображение', use_container_width=True) 
+        st.write("Определяет вид...") 
+        
+        prediction = predict_step(image) 
+        if prediction is not None: 
+            st.write(f"Относится к виду: *{prediction}*")
+    except Exception as e:
+        st.error(f"Ошибка при загрузке или обработке изображения: {e}")
