@@ -1,6 +1,5 @@
 # Установка библиотек 
 import streamlit as st 
-import requests
 from PIL import Image 
 import torch 
 from transformers import AutoImageProcessor, AutoModelForImageClassification 
