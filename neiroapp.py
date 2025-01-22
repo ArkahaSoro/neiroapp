@@ -2,10 +2,8 @@
 import streamlit as st 
 from PIL import Image 
 import torch 
-from transformers import AutoImageProcessor, AutoModelForImageClassification
+from transformers import AutoImageProcessor, AutoModelForImageClassification 
 
-#processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
-#model = AutoModelForImageClassification.from_pretrained("google/vit-base-patch16-224")
 # Загрузка моделей 
 @st.cache_resource()
 def load_auto_image_processor(): 
@@ -34,7 +32,7 @@ def predict_step(image):
             logits = outputs.logits 
 
         predicted_class_idx = logits.argmax(-1).item() 
-        labels = model.config.id2label  # Изменено здесь
+        labels = model.config.id2label  
         predicted_label = labels[predicted_class_idx] 
 
         return predicted_label 
@@ -54,4 +52,4 @@ if uploaded_file is not None:
     
     prediction = predict_step(image) 
     if prediction is not None: 
-        st.write(f"Относится к виду: {prediction}")
+        st.write(f"Относится к виду: {prediction}") 
